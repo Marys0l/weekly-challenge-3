@@ -2,13 +2,19 @@ function generatePassword() {
   
   var passwordCharacters = [];
   //use only these special characters 
-  var usespecial = "!@#$%^&*";
+  var usespecial = "!#$%&'()*+,-./:;<=>?@[^_`{|}~";
   var includeLowercase = false;
   var includeUppercase = false;
   var includeNumbers = false;
   var includeSpecial = false;
-  var passwordLength = prompt("MUST type a digit between 8 and 128 , then click OK");
+  var passwordLength = false;
+  while (!Number.isInteger(passwordLength) || passwordLength < 8 || passwordLength > 128) {
+    
+  passwordLength = prompt("MUST type digit between 8 and 128!");
+  passwordLength = (passwordLength === null) ? null : Number(passwordLength);
+  }
   console.log(passwordLength);
+  
   if (!includeLowercase && !includeUppercase && !includeNumbers && !includeSpecial) {
     includeLowercase = confirm("Would you like your password to contatain lowercase letters");
     includeUppercase = confirm("Would you like your password to contatain uppercase characters?");
@@ -21,6 +27,7 @@ function generatePassword() {
       passwordCharacters.push(String.fromCharCode(i));
     }
   }
+
   //uppercase letters are codes 65-90
   if (includeUppercase) {
     for (var i = 65; i <= 90; i++) {
